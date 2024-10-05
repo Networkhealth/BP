@@ -7,7 +7,7 @@ import { connect } from 'cloudflare:sockets';
 
 // How to generate your own UUID:
 // https://www.uuidgenerator.net/
-let userID = 'cf3a50dc-f9e8-44b2-a611-f3e2509b6ca9';
+let userID = '00a80ab0-0644-4af5-9d27-518b93c7fe34';
 
 // https://www.nslookup.io/domains/bpb.yousef.isegaro.com/dns-records/
 const proxyIPs= ['bpb.yousef.isegaro.com'];
@@ -19,7 +19,7 @@ let trojanPassword = `bpb-trojan`;
 // https://emn178.github.io/online-tools/sha224.html
 // https://www.atatus.com/tools/sha224-to-hash
 let hashPassword = 'b5d0a5f7ff7aac227bc68b55ae713131ffdf605ca0da52cce182d513';
-let panelVersion = '2.6.3';
+let panelVersion = '2.6.4';
 
 if (!isValidUUID(userID)) throw new Error(`Invalid UUID: ${userID}`);
 if (!isValidSHA224(hashPassword)) throw new Error(`Invalid Hash password: ${hashPassword}`);
@@ -1130,7 +1130,7 @@ function generateRemark(index, port, address, cleanIPs, protocol, configType) {
         ? addressType = 'Clean IP'
         : addressType = isDomain(address) ? 'Domain': isIPv4(address) ? 'IPv4' : isIPv6(address) ? 'IPv6' : '';
 
-    return `💥 🇩🇪 ${index} - ${protocol}${type} - ${addressType} : ${port}`;
+    return `💥 🇩🇪  ${index} - ${protocol}${type} - ${addressType} : ${port}`;
 }
 
 function isDomain(address) {
@@ -1207,43 +1207,43 @@ async function updateDataset (env, newSettings, resetSettings) {
 
     const chainProxy = newSettings?.get('outProxy');
     const proxySettings = {
-        remoteDNS: newSettings ? newSettings.get('remoteDNS') : currentSettings ? currentSettings.remoteDNS : 'https://8.8.8.8/dns-query',
-        localDNS: newSettings ? newSettings.get('localDNS') : currentSettings ? currentSettings.localDNS : '8.8.8.8',
-        lengthMin: newSettings ? newSettings.get('fragmentLengthMin') : currentSettings ? currentSettings.lengthMin : '100',
-        lengthMax: newSettings ? newSettings.get('fragmentLengthMax') : currentSettings ? currentSettings.lengthMax : '200',
-        intervalMin: newSettings ? newSettings.get('fragmentIntervalMin') : currentSettings ? currentSettings.intervalMin : '1',
-        intervalMax: newSettings ? newSettings.get('fragmentIntervalMax') : currentSettings ? currentSettings.intervalMax : '1',
-        fragmentPackets: newSettings ? newSettings.get('fragmentPackets') : currentSettings ? currentSettings.fragmentPackets : 'tlshello',
-        blockAds: newSettings ? newSettings.get('block-ads') : currentSettings ? currentSettings.blockAds : false,
-        bypassIran: newSettings ? newSettings.get('bypass-iran') : currentSettings ? currentSettings.bypassIran : false,
-        blockPorn: newSettings ? newSettings.get('block-porn') : currentSettings ? currentSettings.blockPorn : false,
-        bypassLAN: newSettings ? newSettings.get('bypass-lan') : currentSettings ? currentSettings.bypassLAN : false,
-        bypassChina: newSettings ? newSettings.get('bypass-china') : currentSettings ? currentSettings.bypassChina : false,
-        blockUDP443: newSettings ? newSettings.get('block-udp-443') : currentSettings ? currentSettings.blockUDP443 : false,
-        cleanIPs: newSettings ? newSettings.get('cleanIPs')?.replaceAll(' ', '') : currentSettings ? currentSettings.cleanIPs : '',
-        enableIPv6: newSettings ? newSettings.get('enableIPv6') : currentSettings ? currentSettings.enableIPv6 : true,
-        proxyIP: newSettings ? newSettings.get('proxyIP')?.trim() : currentSettings ? currentSettings.proxyIP : '',
-        ports: newSettings ? newSettings.getAll('ports[]') : currentSettings ? currentSettings.ports : ['443'],
-        vlessConfigs: newSettings ? newSettings.get('vlessConfigs') : currentSettings ? currentSettings.vlessConfigs : true,
-        trojanConfigs: newSettings ? newSettings.get('trojanConfigs') : currentSettings ? currentSettings.trojanConfigs : false,
-        outProxy: newSettings ? chainProxy : currentSettings ? currentSettings.outProxy : '',
-        outProxyParams: chainProxy ? extractChainProxyParams(chainProxy) : currentSettings ? currentSettings.outProxyParams : '',
-        wowEndpoint: newSettings ? newSettings.get('wowEndpoint')?.replaceAll(' ', '') : currentSettings ? currentSettings.wowEndpoint : 'engage.cloudflareclient.com:2408',
-        warpEndpoints: newSettings ? newSettings.get('warpEndpoints')?.replaceAll(' ', '') : currentSettings ? currentSettings.warpEndpoints : 'engage.cloudflareclient.com:2408',
-        hiddifyNoiseMode: newSettings ? newSettings.get('hiddifyNoiseMode') : currentSettings ? currentSettings.hiddifyNoiseMode : 'm4',
-        nikaNGNoiseMode: newSettings ? newSettings.get('nikaNGNoiseMode') : currentSettings ? currentSettings.nikaNGNoiseMode : 'quic',
-        noiseCountMin: newSettings ? newSettings.get('noiseCountMin') : currentSettings ? currentSettings.noiseCountMin : '10',
-        noiseCountMax: newSettings ? newSettings.get('noiseCountMax') : currentSettings ? currentSettings.noiseCountMax : '15',
-        noiseSizeMin: newSettings ? newSettings.get('noiseSizeMin') : currentSettings ? currentSettings.noiseSizeMin : '5',
-        noiseSizeMax: newSettings ? newSettings.get('noiseSizeMax') : currentSettings ? currentSettings.noiseSizeMax : '10',
-        noiseDelayMin: newSettings ? newSettings.get('noiseDelayMin') : currentSettings ? currentSettings.noiseDelayMin : '1',
-        noiseDelayMax: newSettings ? newSettings.get('noiseDelayMax') : currentSettings ? currentSettings.noiseDelayMax : '1',
-        warpPlusLicense: newSettings ? newSettings.get('warpPlusLicense') : currentSettings ? currentSettings.warpPlusLicense : '',
-        customCdnAddrs: newSettings ? newSettings.get('customCdnAddrs')?.replaceAll(' ', '') : currentSettings ? currentSettings.customCdnAddrs : '',
-        customCdnHost: newSettings ? newSettings.get('customCdnHost')?.trim() : currentSettings ? currentSettings.customCdnHost : '',
-        customCdnSni: newSettings ? newSettings.get('customCdnSni')?.trim() : currentSettings ? currentSettings.customCdnSni : '',
-        bestVLESSTrojanInterval: newSettings ? newSettings.get('bestVLESSTrojanInterval') : currentSettings ? currentSettings.bestVLESSTrojanInterval : '30',
-        bestWarpInterval: newSettings ? newSettings.get('bestWarpInterval') : currentSettings ? currentSettings.bestWarpInterval : '30',
+        remoteDNS: newSettings ? newSettings.get('remoteDNS') : currentSettings?.hasOwnProperty('remoteDNS') ? currentSettings.remoteDNS : 'https://8.8.8.8/dns-query',
+        localDNS: newSettings ? newSettings.get('localDNS') : currentSettings?.hasOwnProperty('localDNS') ? currentSettings.localDNS : '8.8.8.8',
+        lengthMin: newSettings ? newSettings.get('fragmentLengthMin') : currentSettings?.hasOwnProperty('lengthMin') ? currentSettings.lengthMin : '100',
+        lengthMax: newSettings ? newSettings.get('fragmentLengthMax') : currentSettings?.hasOwnProperty('lengthMax') ? currentSettings.lengthMax : '200',
+        intervalMin: newSettings ? newSettings.get('fragmentIntervalMin') : currentSettings?.hasOwnProperty('intervalMin') ? currentSettings.intervalMin : '1',
+        intervalMax: newSettings ? newSettings.get('fragmentIntervalMax') : currentSettings?.hasOwnProperty('intervalMax') ? currentSettings.intervalMax : '1',
+        fragmentPackets: newSettings ? newSettings.get('fragmentPackets') : currentSettings?.hasOwnProperty('fragmentPackets') ? currentSettings.fragmentPackets : 'tlshello',
+        blockAds: newSettings ? newSettings.get('block-ads') : currentSettings?.hasOwnProperty('blockAds') ? currentSettings.blockAds : false,
+        bypassIran: newSettings ? newSettings.get('bypass-iran') : currentSettings?.hasOwnProperty('bypassIran') ? currentSettings.bypassIran : false,
+        blockPorn: newSettings ? newSettings.get('block-porn') : currentSettings?.hasOwnProperty('blockPorn') ? currentSettings.blockPorn : false,
+        bypassLAN: newSettings ? newSettings.get('bypass-lan') : currentSettings?.hasOwnProperty('bypassLAN') ? currentSettings.bypassLAN : false,
+        bypassChina: newSettings ? newSettings.get('bypass-china') : currentSettings?.hasOwnProperty('bypassChina') ? currentSettings.bypassChina : false,
+        blockUDP443: newSettings ? newSettings.get('block-udp-443') : currentSettings?.hasOwnProperty('blockUDP443') ? currentSettings.blockUDP443 : false,
+        cleanIPs: newSettings ? newSettings.get('cleanIPs')?.replaceAll(' ', '') : currentSettings?.hasOwnProperty('cleanIPs') ? currentSettings.cleanIPs : '',
+        enableIPv6: newSettings ? newSettings.get('enableIPv6') : currentSettings?.hasOwnProperty('enableIPv6') ? currentSettings.enableIPv6 : true,
+        proxyIP: newSettings ? newSettings.get('proxyIP')?.trim() : currentSettings?.hasOwnProperty('proxyIP') ? currentSettings.proxyIP : '',
+        ports: newSettings ? newSettings.getAll('ports[]') : currentSettings?.hasOwnProperty('ports') ? currentSettings.ports : ['443'],
+        vlessConfigs: newSettings ? newSettings.get('vlessConfigs') : currentSettings?.hasOwnProperty('vlessConfigs') ? currentSettings.vlessConfigs : true,
+        trojanConfigs: newSettings ? newSettings.get('trojanConfigs') : currentSettings?.hasOwnProperty('trojanConfigs') ? currentSettings.trojanConfigs : false,
+        outProxy: newSettings ? chainProxy : currentSettings?.hasOwnProperty('outProxy') ? currentSettings.outProxy : '',
+        outProxyParams: chainProxy ? extractChainProxyParams(chainProxy) : currentSettings?.hasOwnProperty('outProxyParams') ? currentSettings.outProxyParams : '',
+        wowEndpoint: newSettings ? newSettings.get('wowEndpoint')?.replaceAll(' ', '') : currentSettings?.hasOwnProperty('wowEndpoint') ? currentSettings.wowEndpoint : 'engage.cloudflareclient.com:2408',
+        warpEndpoints: newSettings ? newSettings.get('warpEndpoints')?.replaceAll(' ', '') : currentSettings?.hasOwnProperty('warpEndpoints') ? currentSettings.warpEndpoints : 'engage.cloudflareclient.com:2408',
+        hiddifyNoiseMode: newSettings ? newSettings.get('hiddifyNoiseMode') : currentSettings?.hasOwnProperty('hiddifyNoiseMode') ? currentSettings.hiddifyNoiseMode : 'm4',
+        nikaNGNoiseMode: newSettings ? newSettings.get('nikaNGNoiseMode') : currentSettings?.hasOwnProperty('nikaNGNoiseMode') ? currentSettings.nikaNGNoiseMode : 'quic',
+        noiseCountMin: newSettings ? newSettings.get('noiseCountMin') : currentSettings?.hasOwnProperty('noiseCountMin') ? currentSettings.noiseCountMin : '10',
+        noiseCountMax: newSettings ? newSettings.get('noiseCountMax') : currentSettings?.hasOwnProperty('noiseCountMax') ? currentSettings.noiseCountMax : '15',
+        noiseSizeMin: newSettings ? newSettings.get('noiseSizeMin') : currentSettings?.hasOwnProperty('noiseSizeMin') ? currentSettings.noiseSizeMin : '5',
+        noiseSizeMax: newSettings ? newSettings.get('noiseSizeMax') : currentSettings?.hasOwnProperty('noiseSizeMax') ? currentSettings.noiseSizeMax : '10',
+        noiseDelayMin: newSettings ? newSettings.get('noiseDelayMin') : currentSettings?.hasOwnProperty('noiseDelayMin') ? currentSettings.noiseDelayMin : '1',
+        noiseDelayMax: newSettings ? newSettings.get('noiseDelayMax') : currentSettings?.hasOwnProperty('noiseDelayMax') ? currentSettings.noiseDelayMax : '1',
+        warpPlusLicense: newSettings ? newSettings.get('warpPlusLicense') : currentSettings?.hasOwnProperty('warpPlusLicense') ? currentSettings.warpPlusLicense : '',
+        customCdnAddrs: newSettings ? newSettings.get('customCdnAddrs')?.replaceAll(' ', '') : currentSettings?.hasOwnProperty('customCdnAddrs') ? currentSettings.customCdnAddrs : '',
+        customCdnHost: newSettings ? newSettings.get('customCdnHost')?.trim() : currentSettings?.hasOwnProperty('customCdnHost') ? currentSettings.customCdnHost : '',
+        customCdnSni: newSettings ? newSettings.get('customCdnSni')?.trim() : currentSettings?.hasOwnProperty('customCdnSni') ? currentSettings.customCdnSni : '',
+        bestVLESSTrojanInterval: newSettings ? newSettings.get('bestVLESSTrojanInterval') : currentSettings?.hasOwnProperty('bestVLESSTrojanInterval') ? currentSettings.bestVLESSTrojanInterval : '30',
+        bestWarpInterval: newSettings ? newSettings.get('bestWarpInterval') : currentSettings?.hasOwnProperty('bestWarpInterval') ? currentSettings.bestWarpInterval : '30',
         panelVersion: panelVersion
     };
 
@@ -2030,10 +2030,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
 						<td>
-                            <button onclick="openQR('https://${hostName}/sub/${userID}#MCI-MTN-WIFI', 'Normal Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('https://${hostName}/sub/${userID}#WIFI-MCI-MTN', 'Normal Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}#MCI-MTN-WIFI', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}#WIFI-MCI-MTN', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2054,7 +2054,7 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
 						<td>
-                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=singbox#MCI-MTN-WIFI', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=singbox#WIFI-MCI-MTN', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
 						</td>
@@ -2067,10 +2067,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/sub/${userID}?app=sfa#MCI-MTN-WIFI', 'Normal Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/sub/${userID}?app=sfa#WIFI-MCI-MTN', 'Normal Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=sfa#MCI-MTN-WIFI', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=sfa#WIFI-MCI-MTN', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2095,10 +2095,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/sub/${userID}?app=clash#MCI-MTN-WIFI', 'Normal Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('https://${hostName}/sub/${userID}?app=clash#WIFI-MCI-MTN', 'Normal Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=clash#MCI-MTN-WIFI', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=clash#WIFI-MCI-MTN', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2140,10 +2140,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/fragsub/${userID}#BPB Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('https://${hostName}/fragsub/${userID}#TUNEL Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}#BPB Fragment', true)">
+                            <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}#TUNEL Fragment', true)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2156,10 +2156,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('https://${hostName}/fragsub/${userID}?app=hiddify#TUNEL-Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', true)">
+                            <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}?app=hiddify#TUNEL-Fragment', true)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2189,10 +2189,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
 						<td>
-                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=xray#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=xray#TUNEL-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=xray#BPB-Warp', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=xray#TUNEL-Warp', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2209,10 +2209,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
 						<td>
-                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=singbox#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=singbox#TUNEL-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=singbox#BPB-Warp', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=singbox#TUNEL-Warp', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
 						</td>
@@ -2237,10 +2237,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=clash#BPB-WARP', 'Warp Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=clash#TUNEL-WARP', 'Warp Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=clash#BPB-WARP', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=clash#TUNEL-WARP', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2270,10 +2270,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
 						<td>
-                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=nikang#TUNEL-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=nikang#TUNEL-Warp-Pro', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
@@ -2286,10 +2286,10 @@ async function renderHomePage (env, hostName, fragConfigs) {
                             </div>
                         </td>
 						<td>
-                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
+                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=hiddify#TUNEL-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
                                 QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
-                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', false)">
+                            <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=hiddify#TUNEL-Warp-Pro', false)">
                                 Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
 						</td>
@@ -3092,7 +3092,7 @@ async function buildWarpOutbounds (env, client, proxySettings, warpConfigs) {
 
         if (client === 'singbox' || client === 'hiddify') {
             let singboxOutbound = buildSingboxWarpOutbound(
-                client === 'hiddify' ? `💥 🇩🇪  Warp Pro ${index + 1} 🇮🇷` : `💥 🇩🇪  Warp ${index + 1} 🇮🇷`, 
+                client === 'hiddify' ? `💥 Warp Pro ${index + 1} 🇮🇷` : `💥 Warp ${index + 1} 🇮🇷`, 
                 warpIPv6, 
                 privateKey, 
                 publicKey, 
@@ -3112,7 +3112,7 @@ async function buildWarpOutbounds (env, client, proxySettings, warpConfigs) {
         }
 
         if (client === 'clash') {
-            let clashOutbound = buildClashWarpOutbound(`💥 🇩🇪  Warp ${index + 1} 🇮🇷`, warpIPv6, privateKey, publicKey, endpoint, reserved, '');
+            let clashOutbound = buildClashWarpOutbound(`💥 Warp ${index + 1} 🇮🇷`, warpIPv6, privateKey, publicKey, endpoint, reserved, '');
             warpOutbounds.push(clashOutbound);
         }
 
@@ -3171,8 +3171,8 @@ async function buildWoWOutbounds (env, client, proxySettings, warpConfigs) {
                     i === 1
                         ? `proxy-${index + 1}` 
                         : client === 'hiddify' 
-                            ? `💥 🇩🇪  WoW Pro ${index + 1} 🌍` 
-                            : `💥 🇩🇪  WoW ${index + 1} 🌍` , 
+                            ? `💥 WoW Pro ${index + 1} 🌍` 
+                            : `💥 WoW ${index + 1} 🌍` , 
                     warpIPv6, 
                     privateKey, 
                     publicKey, 
@@ -3193,7 +3193,7 @@ async function buildWoWOutbounds (env, client, proxySettings, warpConfigs) {
 
             if (client === 'clash') {
                 let clashOutbound = buildClashWarpOutbound(
-                    i === 1 ? `proxy-${index + 1}` : `💥 🇩🇪  WoW ${index + 1} 🌍`, 
+                    i === 1 ? `proxy-${index + 1}` : `💥 WoW ${index + 1} 🌍`, 
                     warpIPv6, 
                     privateKey, 
                     publicKey, 
@@ -3841,7 +3841,7 @@ async function getXrayWarpConfigs (env, client) {
     xrayWarpConfig.routing.rules[xrayWarpConfig.routing.rules.length - 1].outboundTag = 'proxy';
     delete xrayWarpConfig.observatory;
     delete xrayWarpConfig.routing.balancers;
-    xrayWarpBestPing.remarks = client === 'nikang' ? '💥 🇩🇪  Warp Pro Best Ping 🚀' : '💥 🇩🇪  Warp Best Ping 🚀';
+    xrayWarpBestPing.remarks = client === 'nikang' ? '💥  Warp Pro Best Ping 🚀' : '💥 Warp Best Ping 🚀';
     xrayWarpBestPing.dns = await buildXrayDNSObject('1.1.1.1', localDNS, blockAds, bypassIran, bypassChina, bypassLAN, blockPorn, false);
     xrayWarpBestPing.routing.rules = buildXrayRoutingRules(localDNS, blockAds, bypassIran, blockPorn, bypassLAN, bypassChina, blockUDP443, false, true, false, true);
     xrayWarpBestPing.outbounds.splice(0,1);
@@ -3857,7 +3857,7 @@ async function getXrayWarpConfigs (env, client) {
     xrayWarpOutbounds.forEach((outbound, index) => {
         xrayWarpConfigs.push({
             ...xrayWarpConfig,
-            remarks: client === 'nikang' ? `💥 🇩🇪  Warp Pro ${index + 1} 🇮🇷` : `💥 🇩🇪  Warp ${index + 1} 🇮🇷`,
+            remarks: client === 'nikang' ? `💥 Warp Pro ${index + 1} 🇮🇷` : `💥 Warp ${index + 1} 🇮🇷`,
             outbounds: [{...outbound, tag: 'proxy'}, ...xrayWarpConfig.outbounds]
         });
     });
@@ -3868,7 +3868,7 @@ async function getXrayWarpConfigs (env, client) {
             let xrayWoWConfig = structuredClone(xrayWoWConfigTemp);
             const chainOutbound = structuredClone(outbound);
             const proxyOutbound = structuredClone(xrayWoWOutbounds[index + 1]);
-            xrayWoWConfig.remarks = client === 'nikang' ? `💥 🇩🇪  WoW Pro ${proxyIndex} 🌍` : `💥 🇩🇪  WoW ${proxyIndex} 🌍`;
+            xrayWoWConfig.remarks = client === 'nikang' ? `💥 WoW Pro ${proxyIndex} 🌍` : `💥 WoW ${proxyIndex} 🌍`;
             xrayWoWConfig.routing.rules[xrayWoWConfig.routing.rules.length - 1].outboundTag = 'chain';
             xrayWoWConfig.outbounds = [ chainOutbound, proxyOutbound, ...xrayWoWConfig.outbounds ];
             xrayWarpConfigs.push(xrayWoWConfig);
@@ -3881,7 +3881,7 @@ async function getXrayWarpConfigs (env, client) {
     });
 
     let xrayWoWBestPing = structuredClone(xrayWarpBestPing);
-    xrayWoWBestPing.remarks = client === 'nikang' ? '💥 🇩🇪  WoW Pro Best Ping 🚀' : '💥 🇩🇪  WoW Best Ping 🚀';
+    xrayWoWBestPing.remarks = client === 'nikang' ? '💥 WoW Pro Best Ping 🚀' : '💥 WoW Best Ping 🚀';
     xrayWoWBestPing.routing.balancers[0].selector = ['chain'];
     xrayWoWBestPing.observatory.subjectSelector = ['chain'];
     xrayWarpBestPing.outbounds = [...xrayWarpOutbounds, ...xrayWarpBestPing.outbounds];
@@ -4043,7 +4043,7 @@ function buildClashChainOutbound(chainProxyParams) {
 
     const { hostName, port, uuid, flow, security, type, sni, fp, alpn, pbk, sid, spx, headerType, host, path, authority, serviceName, mode } = chainProxyParams;
     let chainOutbound = {
-        "name": "💥 🇩🇪  Chain Best Ping 💥",
+        "name": "💥 Chain Best Ping 💥",
         "type": "vless",
         "server": hostName,
         "port": +port,
@@ -4051,7 +4051,7 @@ function buildClashChainOutbound(chainProxyParams) {
         "uuid": uuid,
         "flow": flow,
         "network": type,
-        "dialer-proxy": "💥 🇩🇪  Best Ping 💥"
+        "dialer-proxy": "💥 Best Ping 💥"
     };
 
     if (security === 'tls') {
@@ -4167,11 +4167,11 @@ async function getClashConfig (env, hostName, isWarp) {
     }
 
     if (isWarp) {
-        config['proxy-groups'][0].proxies = ['💥 🇩🇪  Warp Best Ping 🚀', '💥 🇩🇪  WoW Best Ping 🚀'];
-        config['proxy-groups'][1].name = '💥 🇩🇪  Warp Best Ping 🚀';
+        config['proxy-groups'][0].proxies = ['💥 Warp Best Ping 🚀', '💥 WoW Best Ping 🚀'];
+        config['proxy-groups'][1].name = '💥 Warp Best Ping 🚀';
         config['proxy-groups'][1].interval = +bestWarpInterval;
         config['proxy-groups'].splice(2, 0, structuredClone(config['proxy-groups'][1]));
-        config['proxy-groups'][2].name = '💥 🇩🇪  WoW Best Ping 🚀';
+        config['proxy-groups'][2].name = '💥 WoW Best Ping 🚀';
         const clashWarpOutbounds = await buildWarpOutbounds(env, 'clash', proxySettings, warpConfigs);
         const clashWOWpOutbounds = await buildWoWOutbounds(env, 'clash', proxySettings, warpConfigs);
         config.proxies = [...clashWarpOutbounds, ...clashWOWpOutbounds];
@@ -4187,8 +4187,8 @@ async function getClashConfig (env, hostName, isWarp) {
         });
 
     } else {
-        config['proxy-groups'][0].proxies = ['💥 🇩🇪  Best Ping 💥'];
-        config['proxy-groups'][1].name = '💥 🇩🇪  Best Ping 💥';
+        config['proxy-groups'][0].proxies = ['💥 Best Ping 💥'];
+        config['proxy-groups'][1].name = '💥 Best Ping 💥';
         config['proxy-groups'][1].interval = +bestVLESSTrojanInterval;
     }
 
@@ -4718,15 +4718,15 @@ async function getSingboxConfig (env, hostName, client, isWarp, isFragment) {
         const WOWOutbounds = await buildWoWOutbounds(env, client, proxySettings, warpConfigs);
         config.dns.servers[0].address = '1.1.1.1';
         config.outbounds[0].outbounds = client === 'hiddify'
-            ? ["💥 🇩🇪  Warp Pro Best Ping 🚀", "💥 🇩🇪  WoW Pro Best Ping 🚀"]
-            : ["💥 🇩🇪  Warp Best Ping 🚀", "💥 🇩🇪  WoW Best Ping 🚀"];
+            ? ["💥 Warp Pro Best Ping 🚀", "💥 WoW Pro Best Ping 🚀"]
+            : ["💥 Warp Best Ping 🚀", "💥 WoW Best Ping 🚀"];
         config.outbounds.splice(2, 0, structuredClone(config.outbounds[1]));
         config.outbounds[1].tag = client === 'hiddify' 
-            ? "💥 🇩🇪  Warp Pro Best Ping 🚀"
-            : "💥 🇩🇪  Warp Best Ping 🚀";
+            ? "💥 Warp Pro Best Ping 🚀"
+            : "💥 Warp Best Ping 🚀";
         config.outbounds[2].tag = client === 'hiddify'
-            ? "💥 🇩🇪  WoW Pro Best Ping 🚀"
-            : "💥 🇩🇪  WoW Best Ping 🚀";
+            ? "💥 WoW Pro Best Ping 🚀"
+            : "💥 WoW Best Ping 🚀";
         config.outbounds.push(...warpOutbounds, ...WOWOutbounds);
         warpOutbounds.forEach(outbound => {
             config.outbounds[0].outbounds.push(outbound.tag);
@@ -4873,7 +4873,7 @@ async function getNormalConfigs(env, hostName, client) {
     });
 
     if (outProxy) {
-        let chainRemark = `#${encodeURIComponent('💥 🇩🇪  Chain proxy 🔗')}`;
+        let chainRemark = `#${encodeURIComponent('💥 Chain proxy 🔗')}`;
         if (outProxy.startsWith('socks') || outProxy.startsWith('http')) {
             const regex = /^(?:socks|http):\/\/([^@]+)@/;
             const isUserPass = outProxy.match(regex);
@@ -5075,11 +5075,11 @@ const singboxConfigTemp = {
         {
             type: "selector",
             tag: "proxy",
-            outbounds: ["💥 🇩🇪  Best Ping 💥"]
+            outbounds: ["💥 Best Ping 💥"]
         },
         {
             type: "urltest",
-            tag: "💥 🇩🇪  Best Ping 💥",
+            tag: "💥 Best Ping 💥",
             outbounds: [],
             url: "https://www.gstatic.com/generate_204",
             interval: "30s",
