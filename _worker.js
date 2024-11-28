@@ -6145,7 +6145,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             <hr>
             <div class="footer">
                 <i class="fa fa-github" style="font-size:36px; margin-right: 10px;"></i>
-                <a class="link" href="https://github.com/bia-pain-bache/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
+                <a class="link" href="https://github.com/Networkhealth/BP" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
                 <button id="openModalBtn" class="button">Change Password</button>
                 <button type="button" id="logout" style="background: none; color: var(--color); margin: 0; border: none; cursor: pointer;">
                     <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
@@ -6767,7 +6767,7 @@ function renderErrorPage(message2, error, refer) {
         <div id="error-container">
             <h1>Control Panel <span style="font-size: smaller;">${panelVersion}</span> \</h1>
             <div id="error-message">
-                <h2>${message2} ${refer ? 'Please try again or refer to <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' : ""}
+                <h2>${message2} ${refer ? 'Please try again or refer to <a href="https://github.com/Networkhealth/BP/blob/main/README_fa.md">documents</a>' : ""}
                 </h2>
                 <p><b>${error ? `\u26A0\uFE0F ${error.stack.toString()}` : ""}</b></p>
             </div>
