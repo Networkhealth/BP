@@ -5488,7 +5488,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
         <div class="form-container">
             <form id="configForm">
                 <details open>
-                    <summary><h2>VLESS / TROJAN \u2699\uFE0F</h2></summary>
+                    <summary><h2>TUNEL / TROJAN \u2699\uFE0F</h2></summary>
                     <div class="form-control">
                         <label for="remoteDNS">\u{1F30F} Remote DNS</label>
                         <input type="url" id="remoteDNS" name="remoteDNS" value="${remoteDNS}" required>
@@ -5559,7 +5559,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: baseline; margin-top: 10px;">
                             <div style = "display: flex; justify-content: center; align-items: center;">
                                 <input type="checkbox" id="vlessConfigs" name="vlessConfigs" onchange="handleProtocolChange(event)" value="true" ${vlessConfigs ? "checked" : ""}>
-                                <label for="vlessConfigs" style="margin: 0 5px; font-weight: normal; font-size: unset;">VLESS</label>
+                                <label for="vlessConfigs" style="margin: 0 5px; font-weight: normal; font-size: unset;">TUNEL</label>
                             </div>
                             <div style = "display: flex; justify-content: center; align-items: center;">
                                 <input type="checkbox" id="trojanConfigs" name="trojanConfigs" onchange="handleProtocolChange(event)" value="true" ${trojanConfigs ? "checked" : ""}>
@@ -6460,12 +6460,12 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             }
 
             if (!(isVless && (hasSecurity && validSecurityType || !hasSecurity) && validTransmission) && !isSocksHttp && chainProxy) {
-                alert('\u26D4 Invalid Config! \u{1FAE4} \\n - The chain proxy should be VLESS, Socks or Http!\\n - VLESS transmission should be GRPC,WS or TCP\\n - VLESS security should be TLS,Reality or None\\n - socks or http should be like:\\n + (socks or http)://user:pass@host:port\\n + (socks or http)://host:port');               
+                alert('\u26D4 Invalid Config! \u{1FAE4} \\n - The chain proxy should be TUNEL, Socks or Http!\\n - TUNEL transmission should be GRPC,WS or TCP\\n - TUNEL security should be TLS,Reality or None\\n - socks or http should be like:\\n + (socks or http)://user:pass@host:port\\n + (socks or http)://host:port');               
                 return false;
             }
 
             if (isVless && securityType === 'tls' && vlessPort !== '443') {
-                alert('\u26D4 VLESS TLS port can be only 443 to be used as a proxy chain! \u{1FAE4}');               
+                alert('\u26D4 TUNEL TLS port can be only 443 to be used as a proxy chain! \u{1FAE4}');               
                 return false;
             }
 
@@ -8459,20 +8459,20 @@ async function getSingBoxCustomConfig(env, proxySettings, hostName, client, isFr
   const totalPorts = ports.filter((port) => isFragment ? defaultHttpsPorts.includes(port) : true);
   let proxyIndex = 1;
   const protocols = [
-    ...vlessConfigs ? ["VLESS"] : [],
+    ...vlessConfigs ? ["TUNEL"] : [],
     ...trojanConfigs ? ["Trojan"] : []
   ];
   protocols.forEach((protocol) => {
     let protocolIndex = 1;
     totalPorts.forEach((port) => {
       totalAddresses.forEach((addr) => {
-        let VLESSOutbound, TrojanOutbound;
+        let TUNELOutbound, TrojanOutbound;
         const isCustomAddr = customCdnAddresses.includes(addr);
         const configType = isCustomAddr ? "C" : isFragment ? "F" : "";
         const sni = isCustomAddr ? customCdnSni : randomUpperCase(hostName);
         const host = isCustomAddr ? customCdnHost : hostName;
         const remark = generateRemark(protocolIndex, port, addr, cleanIPs, protocol, configType);
-        if (protocol === "VLESS") {
+        if (protocol === "TUNEL") {
           VLESSOutbound = buildSingBoxVLESSOutbound(
             proxySettings,
             chainProxyOutbound ? `proxy-${proxyIndex}` : remark,
@@ -8541,7 +8541,7 @@ async function getNormalConfigs(proxySettings, hostName, client) {
       const sni = isCustomAddr ? customCdnSni : randomUpperCase(hostName);
       const host = isCustomAddr ? customCdnHost : hostName;
       const path = `${getRandomPath(16)}${proxyIP2 ? `/${encodeURIComponent(btoa(proxyIP2))}` : ""}${earlyData}`;
-      const vlessRemark = encodeURIComponent(generateRemark(proxyIndex, port, addr, cleanIPs, "VLESS", configType));
+      const vlessRemark = encodeURIComponent(generateRemark(proxyIndex, port, addr, cleanIPs, "TUNEL", configType));
       const trojanRemark = encodeURIComponent(generateRemark(proxyIndex, port, addr, cleanIPs, "Trojan", configType));
       const tlsFields = defaultHttpsPorts.includes(port) ? `&security=tls&sni=${sni}&fp=randomized&alpn=${alpn}` : "&security=none";
       if (vlessConfigs) {
